@@ -6,24 +6,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="style.css">
+
 </head>
 <body>
-  <div id="app">
+  <div id="app" v-cloak>
     <input type="text" :value="test" @input="test = $event.target.value">
     <p>test{{test}}</p>
     <input type="text" :value="test" @input="testfunc">
     <br>
-    <form action="">
+    <form action="" @submit.prevent="validate">
       <p>氏名</p>
+      <p  v-if="contactHasError.name" class="error">氏名を入力してください</p>
       <input type="text" v-model="contact.name">
 
       <p>電話番号</p>
+      <p v-if="contactHasError.tel" class="error">電話番号を入力してください</p>
       <input type="text" v-model="contact.tel">
 
       <p>メール</p>
+      <p v-if="contactHasError.email" class="error">メアドを入力してください</p>
       <input type="text" v-model="contact.email">
 
       <p>性別</p>
+      <p v-if="contactHasError.gender" class="error">性別を選択してください</p>
       <label for="">
         男
         <input type="radio" value="male" name="genderRadio" v-model="contact.gender">
@@ -38,6 +43,7 @@
       </label>
 
       <p>年齢</p>
+      <p v-if="contactHasError.age" class="error">年齢を選択してください</p>
       <select v-model="contact.age">
         <option disabled value="">年齢を選択</option>
         <option value="10">10代</option>
@@ -67,8 +73,10 @@
       
 
       <p>注意事項に同意</p>
+      <p v-if="contactHasError.caution" class="error">同意してください</p>
       <input type="checkbox" v-model="contact.caution">
-      <input type="submit" value="送信">
+      <input type="submit" value="送信" 
+      >
     </form>
     <pre>{{contact}}</pre>
   </div>
@@ -89,12 +97,38 @@
             message:'',
             attracts:[],
             caution:false,
-          }
+          },
+          contactHasError:{
+            name:false,
+            tel:false,
+            email:false,
+            gender:false,
+            age:false,
+            caution:false,
+          },
         }
       },
       methods: {
         testfunc(event){
           console.log(event);
+        },
+        validate(){
+          console.log("validate");
+          this.errorReset()
+          if (!this.contact.caution) {this.contactHasError.caution = true}
+          if (!this.contact.name) {this.contactHasError.name = true}
+          if (!this.contact.tel) {this.contactHasError.tel = true}
+          if (!this.contact.email) {this.contactHasError.email = true}
+          if (!this.contact.gender) {this.contactHasError.gender = true}
+          if (!this.contact.age) {this.contactHasError.age = true}
+        },
+        errorReset(){
+          this.contactHasError.name=false
+          this.contactHasError.tel=false
+          this.contactHasError.email=false
+          this.contactHasError.gender=false
+          this.contactHasError.age=false
+          this.contactHasError.caution=false
         }
       },
     })
