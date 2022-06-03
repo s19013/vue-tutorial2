@@ -11,13 +11,14 @@
 <body>
   <div id="app" v-cloak>
     <input type="text" :value="test" @input="test = $event.target.value">
-    <p>test{{test}}</p>
     <input type="text" :value="test" @input="testfunc">
     <br>
+
     <form action="" @submit.prevent="validate">
-      <p>氏名</p>
+      <p>氏名 {{contact.name.length}}/20</p>
       <p  v-if="contactHasError.name" class="error">氏名を入力してください</p>
-      <input type="text" v-model="contact.name">
+      <input type="text" v-model="nameComp">
+      <p v-if="contactHasError.nameLength">20文字以内にしてください</p>
 
       <p>電話番号</p>
       <p v-if="contactHasError.tel" class="error">電話番号を入力してください</p>
@@ -100,11 +101,22 @@
           },
           contactHasError:{
             name:false,
+            nameLength:false,
             tel:false,
             email:false,
             gender:false,
             age:false,
             caution:false,
+          },
+        }
+      },
+      computed:{
+        nameComp:{
+          get(){return this.contact.name},
+          set(value){
+            if (value.length <= 20) {this.contactHasError.nameLength = false}
+            else{this.contactHasError.nameLength = true}
+            return this.contact.name=value
           },
         }
       },
