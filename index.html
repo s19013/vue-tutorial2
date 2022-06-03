@@ -10,141 +10,42 @@
 </head>
 <body>
   <div id="app" v-cloak>
-    <input type="text" :value="test" @input="test = $event.target.value">
-    <input type="text" :value="test" @input="testfunc">
-    <br>
-
-    <form action="" @submit.prevent="validate">
-      <p>氏名 {{contact.name.length}}/20</p>
-      <p  v-if="contactHasError.name" class="error">氏名を入力してください</p>
-      <input type="text" v-model="nameComp">
-      <p v-if="contactHasError.nameLength">20文字以内にしてください</p>
-
-      <p>電話番号</p>
-      <p v-if="contactHasError.tel" class="error">電話番号を入力してください</p>
-      <input type="text" v-model="contact.tel">
-
-      <p>メール</p>
-      <p v-if="contactHasError.email" class="error">メアドを入力してください</p>
-      <input type="text" v-model="contact.email">
-
-      <p>性別</p>
-      <p v-if="contactHasError.gender" class="error">性別を選択してください</p>
-      <label for="">
-        男
-        <input type="radio" value="male" name="genderRadio" v-model="contact.gender">
-      </label>
-      <label for="">
-        女
-        <input type="radio" value="female" name="genderRadio" v-model="contact.gender">
-      </label>
-      <label for="">
-        その他
-        <input type="radio" value="other" name="genderRadio" v-model="contact.gender">
-      </label>
-
-      <p>年齢</p>
-      <p v-if="contactHasError.age" class="error">年齢を選択してください</p>
-      <select v-model="contact.age">
-        <option disabled value="">年齢を選択</option>
-        <option value="10">10代</option>
-        <option value="20">20代</option>
-        <option value="30">30代</option>
-        <option value="40">40代~</option>
-      </select>
-
-      <p>メッセージ</p>
-      <textarea name="" id="" cols="30" rows="10" v-model="contact.message"></textarea>
-
-      <p>サイトを知った理由</p>
-      <label for="">
-        webサイト
-        <input type="checkbox" name="attracts" value="web" v-model="contact.attracts">
-      </label>
-      <br>
-      <label for="">
-        cm
-        <input type="checkbox" name="attracts" value="cm" v-model="contact.attracts">
-      </label>
-      <br>
-      <label for="">
-        その他
-        <input type="checkbox" name="attracts" value="other" v-model="contact.attracts">
-      </label>
-      
-
-      <p>注意事項に同意</p>
-      <p v-if="contactHasError.caution" class="error">同意してください</p>
-      <input type="checkbox" v-model="contact.caution">
-      <input type="submit" value="送信" 
-      >
-    </form>
-    <pre>{{contact}}</pre>
+    <img :src="dogImage" alt="">
+    <button @click="getDogImage()">push</button>
   </div>
 
 <script src="https://cdn.jsdelivr.net/npm/vue@2.6.11/dist/vue.js"></script>
 <script>
-    let app = new Vue({
-      el : '#app',
-      data(){
-        return{
-          test:'abv',
-          contact:{
-            name:'',
-            tel:'',
-            email:'',
-            gender:'',
-            age:'',
-            message:'',
-            attracts:[],
-            caution:false,
-          },
-          contactHasError:{
-            name:false,
-            nameLength:false,
-            tel:false,
-            email:false,
-            gender:false,
-            age:false,
-            caution:false,
-          },
-        }
-      },
-      computed:{
-        nameComp:{
-          get(){return this.contact.name},
-          set(value){
-            if (value.length <= 20) {this.contactHasError.nameLength = false}
-            else{this.contactHasError.nameLength = true}
-            return this.contact.name=value
-          },
-        }
-      },
-      methods: {
-        testfunc(event){
-          console.log(event);
-        },
-        validate(){
-          console.log("validate");
-          this.errorReset()
-          if (!this.contact.caution) {this.contactHasError.caution = true}
-          if (!this.contact.name) {this.contactHasError.name = true}
-          if (!this.contact.tel) {this.contactHasError.tel = true}
-          if (!this.contact.email) {this.contactHasError.email = true}
-          if (!this.contact.gender) {this.contactHasError.gender = true}
-          if (!this.contact.age) {this.contactHasError.age = true}
-        },
-        errorReset(){
-          this.contactHasError.name=false
-          this.contactHasError.tel=false
-          this.contactHasError.email=false
-          this.contactHasError.gender=false
-          this.contactHasError.age=false
-          this.contactHasError.caution=false
-        }
-      },
-    })
-  </script>
+  const url = 'https://dog.ceo/api/breeds/image/random';
+  const options = {
+    method:'get'
+  }
+  const app = new Vue({
+    el : '#app',
+    data(){
+      return{
+        dogImage:''
+      }
+    },
+    computed:{
+
+    },
+    methods: {
+      async getDogImage(){
+        const response = await fetch(url,options)
+        .then(response => response.json())
+        console.log(response);
+        this.dogImage = response.message
+      }
+    },
+    // created() {
+    //   this.getDogImage()
+    // },
+    mounted() {
+      this.getDogImage()
+    },
+  })
+</script>
 
 </body>
 </html>
