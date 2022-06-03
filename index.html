@@ -7,15 +7,21 @@
     <title>Document</title>
     <link rel="stylesheet" href="style.css">
 
+    <!-- lodash -->
+    <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js"></script>
 </head>
 <body>
   <div id="app" v-cloak>
     <img :src="dogImage" alt="">
-    <button @click="getDogImage()">push</button>
+    <button @click="getDogImage">push</button>
   </div>
 
 <script src="https://cdn.jsdelivr.net/npm/vue@2.6.11/dist/vue.js"></script>
 <script>
+  //画面サイズが変わった時
+  // window.addEventListener('resize',()=>{
+  //   console.log("resized");
+  // })
   const url = 'https://dog.ceo/api/breeds/image/random';
   const options = {
     method:'get'
@@ -24,24 +30,28 @@
     el : '#app',
     data(){
       return{
-        dogImage:''
+        dogImage:'',
+        
       }
     },
     computed:{
 
     },
     methods: {
-      async getDogImage(){
+      // getDogImage:_.debounce(async function(){
+      //   const response = await fetch(url,options)
+      //   .then(response => response.json())
+      //   console.log(response);
+      //   this.dogImage = response.message
+      // },1500)
+      getDogImage:_.throttle(async function(){
         const response = await fetch(url,options)
         .then(response => response.json())
         console.log(response);
         this.dogImage = response.message
-      }
+      },1500)
     },
-    // created() {
-    //   this.getDogImage()
-    // },
-    mounted() {
+    created() {
       this.getDogImage()
     },
   })
