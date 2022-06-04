@@ -29,12 +29,14 @@
 </head>
 <body>
   <div id="app" v-cloak class="parent">
-    <child-component></child-component>
+    親コンポーネント
+    <child-component class="child"></child-component>
   </div>
 </body>
 <script src="https://cdn.jsdelivr.net/npm/vue@2.6.11/dist/vue.js"></script>
-<script src="./child-component.js" type="module"></script>
-<script>
+
+<script type="module">
+  import {childComponent} from './child-component.js';
   const app = new Vue({
       el:'#app',
       components:{

@@ -1,6 +1,6 @@
 import {grandChildComponent} from './grand-child-component.js';
 
-const childComponent = {
+export const childComponent = {
     template:`
     <div>
     子供コンポーネント
