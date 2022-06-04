@@ -9,47 +9,51 @@
 
     <!-- lodash -->
     <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js"></script>
+    <style>
+      .parent{
+        width:800px;
+        margin: 0 auto;
+        border: 1px red solid;
+      }
+      .child{
+        width: 30%;
+        margin: 0 auto;
+        border: 1px blue solid;
+      }
+    </style>
 </head>
 <body>
-  <div id="app" v-cloak>
-    <img :src="dogImage" alt="">
-    <button @click="getDogImage">push</button>
+  <div id="app" v-cloak class="parent">
+    <my-component title="テスト" class="child"></my-component>
+    <my-component :title="parentTitle" class="child"></my-component>
+    <my-component disabled class="child"></my-component>
+    <emit-test 
+      @custom-event="parentMethod"
+      class="child">
+    </emit-test>
   </div>
 
 <script src="https://cdn.jsdelivr.net/npm/vue@2.6.11/dist/vue.js"></script>
+<script src="my-component.js"></script>
+<script src="emit-test.js"></script>
 <script>
-  //画面サイズが変わった時
-  // window.addEventListener('resize',()=>{
-  //   console.log("resized");
-  // })
-  const url = 'https://dog.ceo/api/breeds/image/random';
-  const options = {
-    method:'get'
-  }
   const app = new Vue({
-    el : '#app',
-    data(){
-      return{
-        dogImage:'',
-        
+      el:'#app',
+      components:{
+        emitTest,
+        myComponent
+      },
+      data(){
+        return {
+          parentTitle: '親側のタイトル'
+        }
+      },
+      methods:{
+        parentMethod(e){
+          console.log(e)
+        }
       }
-    },
-    computed:{
-
-    },
-    methods: {
-      getDogImage:_.debounce(_.throttle(async function(){
-        const response = await fetch(url,options)
-        .then(response => response.json())
-        console.log(response);
-        this.dogImage = response.message
-      },1000),1500)
-    },
-    created() {
-      this.getDogImage()
-    },
   })
 </script>
-
 </body>
 </html>
