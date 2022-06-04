@@ -44,12 +44,12 @@
       //   console.log(response);
       //   this.dogImage = response.message
       // },1500)
-      getDogImage:_.throttle(async function(){
+      getDogImage:_.debounce(_.throttle(async function(){
         const response = await fetch(url,options)
         .then(response => response.json())
         console.log(response);
         this.dogImage = response.message
-      },1500)
+      },1000),1500)
     },
     created() {
       this.getDogImage()
