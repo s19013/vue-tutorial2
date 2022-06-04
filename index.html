@@ -20,28 +20,25 @@
         margin: 0 auto;
         border: 1px blue solid;
       }
+      .grand_child{
+        width: 20%;
+        margin:0 auto;
+        border:1px green solid
+      }
     </style>
 </head>
 <body>
   <div id="app" v-cloak class="parent">
-    <my-component title="テスト" class="child"></my-component>
-    <my-component :title="parentTitle" class="child"></my-component>
-    <my-component disabled class="child"></my-component>
-    <emit-test 
-      @custom-event="parentMethod"
-      class="child">
-    </emit-test>
+    <child-component></child-component>
   </div>
-
+</body>
 <script src="https://cdn.jsdelivr.net/npm/vue@2.6.11/dist/vue.js"></script>
-<script src="my-component.js"></script>
-<script src="emit-test.js"></script>
+<script src="child-component"></script>
 <script>
   const app = new Vue({
       el:'#app',
       components:{
-        emitTest,
-        myComponent
+        childComponent
       },
       data(){
         return {
@@ -55,5 +52,4 @@
       }
   })
 </script>
-</body>
 </html>
