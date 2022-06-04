@@ -1,4 +1,5 @@
-import grandChildComponent from 'grand-child-components';
+import {grandChildComponent} from 'grand-child-component.js';
+
 
 const childComponent = {
     template:`
