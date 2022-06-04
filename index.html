@@ -38,12 +38,6 @@
 
     },
     methods: {
-      // getDogImage:_.debounce(async function(){
-      //   const response = await fetch(url,options)
-      //   .then(response => response.json())
-      //   console.log(response);
-      //   this.dogImage = response.message
-      // },1500)
       getDogImage:_.debounce(_.throttle(async function(){
         const response = await fetch(url,options)
         .then(response => response.json())
