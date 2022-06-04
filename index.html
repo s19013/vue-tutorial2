@@ -31,12 +31,14 @@
   <div id="app" v-cloak class="parent">
     親コンポーネント
     <child-component class="child"></child-component>
+    <p>{{text}}</p>
   </div>
 </body>
 <script src="https://cdn.jsdelivr.net/npm/vue@2.6.11/dist/vue.js"></script>
 
 <script type="module">
   import {childComponent} from './child-component.js';
+  const eventBus = new Vue()
   const app = new Vue({
       el:'#app',
       components:{
@@ -44,12 +46,19 @@
       },
       data(){
         return {
-
+          text:''
         }
       },
       methods:{
 
-      }
+      },
+      mounted() {
+        //孫の方でこのイベントが起きる
+        eventBus.$on('eventBus-test',test=>{
+          console.log(test)
+          // this.text=test
+        })
+      },
   })
 </script>
 </html>
