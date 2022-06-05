@@ -22,88 +22,25 @@
     <link href="https://cdn.jsdelivr.net/npm/@mdi/font@5.5.55/css/materialdesignicons.min.css" rel="stylesheet">
 </head>
 <style>
-  .red{
-    background-color: red;
-  }
-  .green{
-    background-color: green;
-  }
-  .blue{
-    background-color: blue;
-  }
-  .paleturquoise{
-    background-color: paleturquoise;
-  }
+  
+  
 </style>
 <body>
   <div id="app" v-cloak class="parent">
     <v-app>
+      <v-app-bar >
+        ヘッダー
+      </v-app-bar>
+
       <v-main>
-        <v-app-bar>
-          ヘッダー
-        </v-app-bar>
         <v-container fluid class="paleturquoise">
-          <v-row>
-            <!-- md以上なら4つそれ以下は12使う -->
-            <v-col class="my-5 red"   cols="12" md="4">
-              <v-tooltip bottom>
-                <template v-slot:activator="{on,attrs}">
-                  <v-btn
-                  depressed
-                  color="primary"
-                  v-bind="attrs"
-                  v-on="on"
-                  >
-                  Primary
-                  </v-btn>
-                </template>
-                <span>おしてもなにも起きないよ</span>
-              </v-tooltip>
-            </v-col>
 
-            <v-col class="py-2 green" cols="12" md="4">
-              <v-card
-                  class="mx-auto"
-                  max-width="344"
-                  outlined>
+          <sql-table-component></sql-table-component>
 
-                  <v-list-item three-line>
-                    <v-list-item-content>
-                      <div class="text-overline mb-4">
-                        OVERLINE
-                      </div>
-                      <v-list-item-title class="text-h5 mb-1">
-                        Headline 5
-                      </v-list-item-title>
-                      <v-list-item-subtitle>Greyhound divisely hello coldly fonwderfully</v-list-item-subtitle>
-                    </v-list-item-content>
-                  
-                    <v-list-item-avatar
-                      tile
-                      size="80"
-                      color="grey"
-                    ></v-list-item-avatar>
-                  </v-list-item>
-                
-                  <v-card-actions>
-                    <v-btn
-                      outlined
-                      rounded
-                      text
-                    >
-                      Button
-                    </v-btn>
-                  </v-card-actions>
-                </v-card>
-            </v-col>
-            
-            <v-col class="blue"  cols="12" md="4">
-              <card-component></card-component>
-            </v-col>
-            
-          </v-row>
         </v-container>
       </v-main>
+
+      <v-footer>フッター</v-footer>
     </v-app>
   </div>
 </body>
@@ -111,51 +48,13 @@
 <!-- fluidでレスポンシブ -->
 
 <script type="module">
-  const cardComponent = {
-    template:`
-  <v-card
-    class="mx-auto"
-    max-width="344"
-    outlined
-  >
-    <v-list-item three-line>
-      <v-list-item-content>
-        <div class="text-overline mb-4">
-          OVERLINE
-        </div>
-        <v-list-item-title class="text-h5 mb-1">
-          Headline 5
-        </v-list-item-title>
-        <v-list-item-subtitle>Greyhound divisely hello coldly fonwderfully</v-list-item-subtitle>
-      </v-list-item-content>
-
-      <v-list-item-avatar
-        tile
-        size="80"
-        color="grey"
-      ></v-list-item-avatar>
-    </v-list-item>
-
-    <v-card-actions>
-      <v-btn
-        outlined
-        rounded
-        text
-      >
-        Button
-      </v-btn>
-    </v-card-actions>
-  </v-card>
-    `
-  }
-
-
+import {sqlTableComponent} from './sql-table-component.js';
 
   const app = new Vue({
       el:'#app',
       vuetify: new Vuetify(),
       components:{
-        cardComponent
+        sqlTableComponent
       }
   })
 
