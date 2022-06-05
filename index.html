@@ -7,58 +7,35 @@
     <title>Document</title>
     <link rel="stylesheet" href="style.css">
 
+    <!-- vue -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.11/dist/vue.js"></script>
+
+    <!-- vuetify -->
+    <link href="https://cdn.jsdelivr.net/npm/vuetify@2.3.10/dist/vuetify.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/vuetify@2.3.10/dist/vuetify.js"></script>
+
     <!-- lodash -->
     <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js"></script>
-    <style>
-      .parent{
-        width:800px;
-        margin: 0 auto;
-        border: 1px red solid;
-      }
-      .child{
-        width: 30%;
-        margin: 0 auto;
-        border: 1px blue solid;
-      }
-      .grand_child{
-        width: 20%;
-        margin:0 auto;
-        border:1px green solid
-      }
-    </style>
+
+    <!-- googlefont -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@mdi/font@5.5.55/css/materialdesignicons.min.css" rel="stylesheet">
 </head>
 <body>
   <div id="app" v-cloak class="parent">
-    親コンポーネント
-    <child-component class="child"></child-component>
-    <p>{{text}}</p>
+    <v-app>
+      <v-main>
+        <v-container>Hello world</v-container>
+      </v-main>
+    </v-app>
   </div>
 </body>
-<script src="https://cdn.jsdelivr.net/npm/vue@2.6.11/dist/vue.js"></script>
 
 <script type="module">
-  import {childComponent} from './child-component.js';
-  const eventBus = new Vue()
+  
   const app = new Vue({
       el:'#app',
-      components:{
-        childComponent
-      },
-      data(){
-        return {
-          text:''
-        }
-      },
-      methods:{
-
-      },
-      mounted() {
-        //孫の方でこのイベントが起きる
-        eventBus.$on('eventBus-test',test=>{
-          console.log(test)
-          // this.text=test
-        })
-      },
+      vuetify: new Vuetify(),
   })
 </script>
 </html>
