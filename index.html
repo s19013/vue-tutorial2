@@ -31,19 +31,22 @@
   .blue{
     background-color: blue;
   }
+  .paleturquoise{
+    background-color: paleturquoise;
+  }
 </style>
 <body>
   <div id="app" v-cloak class="parent">
     <v-app>
       <v-main>
-        <v-app-bar >
+        <v-app-bar>
           ヘッダー
         </v-app-bar>
-        <v-container fluid>
+        <v-container fluid class="paleturquoise">
           <v-row>
             <!-- md以上なら4つそれ以下は12使う -->
-            <v-col class="red"   cols="12" md="4">a</v-col>
-            <v-col class="green" cols="12" md="4">b</v-col>
+            <v-col class="my-5 red"   cols="12" md="4">a</v-col>
+            <v-col class="py-2 green" cols="12" md="4">b</v-col>
             <v-col class="blue"  cols="12" md="4">c</v-col>
           </v-row>
         </v-container>
