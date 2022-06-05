@@ -46,11 +46,19 @@
           <v-row>
             <!-- md以上なら4つそれ以下は12使う -->
             <v-col class="my-5 red"   cols="12" md="4">
-              <v-btn
-                depressed
-                color="primary">
-                Primary
-              </v-btn>
+              <v-tooltip bottom>
+                <template v-slot:activator="{on,attrs}">
+                  <v-btn
+                  depressed
+                  color="primary"
+                  v-bind="attrs"
+                  v-on="on"
+                  >
+                  Primary
+                  </v-btn>
+                </template>
+                <span>おしてもなにも起きないよ</span>
+              </v-tooltip>
             </v-col>
 
             <v-col class="py-2 green" cols="12" md="4">
@@ -88,7 +96,11 @@
                   </v-card-actions>
                 </v-card>
             </v-col>
-            <card-component class="blue"  cols="12" md="4"></card-component>
+            
+            <v-col class="blue"  cols="12" md="4">
+              <card-component></card-component>
+            </v-col>
+            
           </v-row>
         </v-container>
       </v-main>
