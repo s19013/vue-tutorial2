@@ -21,6 +21,17 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/@mdi/font@5.5.55/css/materialdesignicons.min.css" rel="stylesheet">
 </head>
+<style>
+  .red{
+    background-color: red;
+  }
+  .green{
+    background-color: green;
+  }
+  .blue{
+    background-color: blue;
+  }
+</style>
 <body>
   <div id="app" v-cloak class="parent">
     <v-app>
@@ -28,7 +39,14 @@
         <v-app-bar >
           ヘッダー
         </v-app-bar>
-        <v-container fluid>Hello world</v-container>
+        <v-container fluid>
+          <v-row>
+            <!-- md以上なら4つそれ以下は12使う -->
+            <v-col class="red"   cols="12" md="4">a</v-col>
+            <v-col class="green" cols="12" md="4">b</v-col>
+            <v-col class="blue"  cols="12" md="4">c</v-col>
+          </v-row>
+        </v-container>
       </v-main>
     </v-app>
   </div>
