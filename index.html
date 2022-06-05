@@ -45,9 +45,50 @@
         <v-container fluid class="paleturquoise">
           <v-row>
             <!-- md以上なら4つそれ以下は12使う -->
-            <v-col class="my-5 red"   cols="12" md="4">a</v-col>
-            <v-col class="py-2 green" cols="12" md="4">b</v-col>
-            <v-col class="blue"  cols="12" md="4">c</v-col>
+            <v-col class="my-5 red"   cols="12" md="4">
+              <v-btn
+                depressed
+                color="primary">
+                Primary
+              </v-btn>
+            </v-col>
+
+            <v-col class="py-2 green" cols="12" md="4">
+              <v-card
+                  class="mx-auto"
+                  max-width="344"
+                  outlined>
+
+                  <v-list-item three-line>
+                    <v-list-item-content>
+                      <div class="text-overline mb-4">
+                        OVERLINE
+                      </div>
+                      <v-list-item-title class="text-h5 mb-1">
+                        Headline 5
+                      </v-list-item-title>
+                      <v-list-item-subtitle>Greyhound divisely hello coldly fonwderfully</v-list-item-subtitle>
+                    </v-list-item-content>
+                  
+                    <v-list-item-avatar
+                      tile
+                      size="80"
+                      color="grey"
+                    ></v-list-item-avatar>
+                  </v-list-item>
+                
+                  <v-card-actions>
+                    <v-btn
+                      outlined
+                      rounded
+                      text
+                    >
+                      Button
+                    </v-btn>
+                  </v-card-actions>
+                </v-card>
+            </v-col>
+            <card-component class="blue"  cols="12" md="4"></card-component>
           </v-row>
         </v-container>
       </v-main>
@@ -58,10 +99,54 @@
 <!-- fluidでレスポンシブ -->
 
 <script type="module">
-  
+  const cardComponent = {
+    template:`
+  <v-card
+    class="mx-auto"
+    max-width="344"
+    outlined
+  >
+    <v-list-item three-line>
+      <v-list-item-content>
+        <div class="text-overline mb-4">
+          OVERLINE
+        </div>
+        <v-list-item-title class="text-h5 mb-1">
+          Headline 5
+        </v-list-item-title>
+        <v-list-item-subtitle>Greyhound divisely hello coldly fonwderfully</v-list-item-subtitle>
+      </v-list-item-content>
+
+      <v-list-item-avatar
+        tile
+        size="80"
+        color="grey"
+      ></v-list-item-avatar>
+    </v-list-item>
+
+    <v-card-actions>
+      <v-btn
+        outlined
+        rounded
+        text
+      >
+        Button
+      </v-btn>
+    </v-card-actions>
+  </v-card>
+    `
+  }
+
+
+
   const app = new Vue({
       el:'#app',
       vuetify: new Vuetify(),
+      components:{
+        cardComponent
+      }
   })
+
+  
 </script>
 </html>
